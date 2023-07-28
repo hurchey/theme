@@ -6,7 +6,7 @@
 {% for product in collections['frontpage'].products %}
 
 <div>
-    <img src = "{{produc.featured_image }}"/>
+    <img src = "{{produc.featured_image | image_url }}"/>
     <h3>{{ product.title }}</h3>
     <p>{{product.price}}</p>
 </div>
