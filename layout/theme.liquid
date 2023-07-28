@@ -1,6 +1,7 @@
 <html>
 <head>
-{{ content_for_header }}
+    {{ content_for_header }}
+    {{ 'styles.css' | assest_url | stylesheet_tag}}
 </head>
 <body>
 {{ content_for_layout }}
