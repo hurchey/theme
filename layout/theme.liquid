@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <head>
     {{ content_for_header }}
-    {{ 'style.css' | assest_url | stylesheet_tag}}
+    {{ 'style.css' | assest_url}}
 </head>
+
 <body>
-{{ content_for_layout }}
+    {{ content_for_layout }}
 </body>
+
 </html> 
