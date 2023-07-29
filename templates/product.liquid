@@ -19,21 +19,17 @@
 
 
 
-{% assign coefficient = settings.coefficient | default: 0.4 %}
+{% for variation in product.variations %}
+  {% assign compareAtPrice = variation.compare_at_price | times: 1.0 %}
+  {% assign price = variation.price | times: 1.0 %}
+  {% assign coefficient = schema.coefficient | default: 0.4 %}
+  {% assign discountPercentage = (compareAtPrice - price) | divided_by: compareAtPrice | times: 100 %}
 
-{% for variation in product.variants %}
-  {% assign compareAtPrice = variation.compare_at_price | default: variation.price %}
-  {% assign discountPercentage = ((compareAtPrice - variation.price) / compareAtPrice) | times: 100 | round: 2 %}
-  
-  <div class="variation-block">
-    <h3>Variant: {{ variation.title }}</h3>
-    <p>Price: {{ variation.price }}</p>
-    {% if variation.compare_at_price %}
-      <p>Compare at Price: {{ variation.compare_at_price }}</p>
-      {% if discountPercentage >= coefficient %}
-        <p>Final Sale</p>
-      {% endif %}
+  <div>
+    <p>Price: {{ variation.price | money}}</p>
+    {% if discountPercentage >= coefficient %}
+      <p>Final Sale</p>
     {% endif %}
-    <input type="hidden" name="discountPercentage" value="{{ discountPercentage }}">
+    <input type="hidden" name="coefficient" value="{{ coefficient }}">
   </div>
 {% endfor %}
