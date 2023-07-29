@@ -1,1 +1,37 @@
-<h1>Product Template </h1>
+<h1>{{ product.title }}</h1>
+<p>{{ product.price | money}}</p>
+<div>
+    {{product.description }}
+</div>
+
+{% form 'product' , product: product %}
+    <select name = "id">
+        {% for product.variants %}
+            <option value = {{variant.id}}>
+                {{variant.title}}
+            </option>
+        {% endfor %}
+    </select>
+{% endform %}
+
+
+
+{% comment %} 
+{% assign coefficient = settings.coefficient | default: 0.4 %}
+
+{% for variation in product.variants %}
+  {% assign compareAtPrice = variation.compare_at_price | default: variation.price %}
+  {% assign discountPercentage = ((compareAtPrice - variation.price) / compareAtPrice) | times: 100 | round: 2 %}
+  
+  <div class="variation-block">
+    <h3>Variant: {{ variation.title }}</h3>
+    <p>Price: {{ variation.price }}</p>
+    {% if variation.compare_at_price %}
+      <p>Compare at Price: {{ variation.compare_at_price }}</p>
+      {% if discountPercentage >= coefficient %}
+        <p>Final Sale</p>
+      {% endif %}
+    {% endif %}
+    <input type="hidden" name="discountPercentage" value="{{ discountPercentage }}">
+  </div>
+{% endfor %} {% endcomment %}
