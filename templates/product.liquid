@@ -4,7 +4,7 @@
     {{product.description }}
 </div>
 
-{% comment %} {% form 'product' , product %}
+{% form 'product' , product %}
     <select name = "id">
         {% for variant in product.variants %}
             <option value = {{variant.id}}>
@@ -14,22 +14,8 @@
     </select>
 
     <button type = "submit"> Add to cart </button>
-{% endform %} {% endcomment %}
+{% endform %}
 
 
 
 
-{% for variation in product.variations %}
-  {% assign compareAtPrice = variation.compare_at_price | times: 1.0 %}
-  {% assign price = variation.price | times: 1.0 %}
-  {% assign coefficient = schema.coefficient | default: 0.4 %}
-  {% assign discountPercentage = (compareAtPrice - price) | divided_by: compareAtPrice | times: 100 %}
-
-  <div>
-    <p>Price: {{ variation.price | money}}</p>
-    {% if discountPercentage >= coefficient %}
-      <p>Final Sale</p>
-    {% endif %}
-    <input type="hidden" name="coefficient" value="{{ coefficient }}">
-  </div>
-{% endfor %}
