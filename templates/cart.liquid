@@ -1,21 +1,22 @@
 {% form 'cart', cart %}
 
-<h1>Cart</h1>
+    <h1>Cart</h1>
 
-{% for item in cart.items %}
-    <div>
-        <img src = "{{ item.image | image_url: width: 150}}" />
-        <h2>{{item.title}}</h2>
-        <p>{{item.price | money}}</p>
-    </div>
+    {% for item in cart.items %}
+        <div>
+            <img src = "{{ item.image | image_url: width: 150}}" />
+            <h2>{{item.title}}</h2>
+            <p>{{item.price | money}}</p>
+        </div>
+    {% endfor %}
 
-    <button type = "submit" name = "checkout">
-        Checkout
-    </button>
+        <hr/>
 
-    <hr/>
+        <p> Total: {{ cart.total_price | money}} </p>
 
-    <p> Total: {{ cart.total_price | money}} </p>
+        <button type = "submit" name = "checkout">
+            Checkout
+        </button>
 
 
-{% endfor %}
+{% endform %}
