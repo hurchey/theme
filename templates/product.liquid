@@ -26,7 +26,7 @@
             <p>Final Sale</p>
         {% else %}
             {% if variant.title == 'Small' %}
-                {% assign discountedPrice = currentPrice | times: 0.9 %}
+                {% assign discountedPrice = currentPrice | times: discountPercentage %}
                 <p>Discounted Price: {{ discountedPrice | money }}</p>
             {% else %}
                 <p>Price: {{ currentPrice | money }}</p>
