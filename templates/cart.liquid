@@ -7,10 +7,18 @@
     {% else %}
 
         {% for item in cart.items %}
+            {% assign discount_coefficient = 0.4 %}
+            {% assign compare_at_price = item.variant.compare_at_price | default: item.variant.price %}
+
             <div>
                 <img src = "{{ item.image | image_url: width: 150}}" />
                 <h2>{{item.title}}</h2>
                 <p>{{item.final_line_price | money}}</p>
+
+                {% assign sale_percent = (compare_at_price - item.variant.price) / compare_at_price %}
+                {% if sale_percent >= discount_coefficient %}
+                    <p>Final Sale</p>
+                {% endif %}
                 <input name = "updates[]" value ="{{ item.quantity }}">
                 <a href ="{{ item.url_to_remove }}"> Remove</a>
             </div>
