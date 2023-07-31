@@ -24,7 +24,7 @@
 
     {% if variant.title == 'Small' or variant.title == 'Large' %}
         {% assign discountedPrice = variant.price %}
-        {% assign showFinalSale = false %}
+        {% assign showFinalSale = true %}
     {% else %}
         {% assign discountedPrice = variant.price | times: (1 - coefficient) %}
         {% assign showFinalSale = discount >= coefficient %}
@@ -32,7 +32,7 @@
 
     <p>Price: {{ discountedPrice | money }}</p>
 
-    {% if showFinalSale %}
+    {% if !showFinalSale %}
         <p>Final Sale</p>
     {% endif %}
 
