@@ -16,24 +16,14 @@
         {% endfor %}
     </select>
 
-    {%- assign coefficient = 0.4 -%}
-    {%- if schema.coefficient != blank -%}
-        {%- assign coefficient = schema.coefficient -%}
-    {%- endif -%}
-
-    {%- for variation in product.variants -%}
-        {%- assign compareAtPrice = variation.compare_at_price | plus: 0 -%}
-        {%- assign price = variation.price | plus: 0 -%}
-        {%- assign discountPercentage = compareAtPrice != 0 ? ((compareAtPrice - price) / compareAtPrice) : 0 -%}
-
-        <div>
-        <p>Price: {{ variation.price | money }}</p>
-        {%- if discountPercentage >= coefficient -%}
-            <p>Final Sale</p>
-        {%- endif -%}
-        <input type="hidden" name="coefficient" value="{{ coefficient }}">
-        </div>
-    {%- endfor -%}
+    {% for variant in product.variants %}
+  {% if variant.title == 'Small' %}
+    {% assign discountedPrice = variant.price | times: 0.4 %}
+    <p>Discounted Price: ${{ discountedPrice | money }}</p>
+  {% else %}
+    <p>Price: ${{ variant.price | money }}</p>
+  {% endif %}
+{% endfor %}
 
 
     <button type = "submit"> Add to cart </button>
