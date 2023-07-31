@@ -1,17 +1,8 @@
-{% comment %} <h1>Hello World It's Me</h1> {% endcomment %}
-{% comment %} <img src = "{{ 'mepicture.png' | asset_url }}" /> {% endcomment %}
-
 <h2>{{ collections['frontpage'].title }}</h2>
 
 {% for product in collections['frontpage'].products %}
 
-<div>
-    <a href = "{{ product.url }}">
-        <img src = "{{product.featured_image | image_url: width: 350 }}"/>
-        <h3>{{ product.title }}</h3>
-        <p>{{product.price | money}}</p>
-    </a>
-</div>
+{% render 'product-item', product: product %}
 
   {{- product.title | link_to: product.url }}
 {% endfor %} 
