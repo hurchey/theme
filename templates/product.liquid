@@ -17,7 +17,7 @@
     </select>
 
     {% for variant in product.variants %}
-        {% if variant.title == 'Small' %}
+        {% if variant.title == 'Small', 'Medium','Large' %}
             {% assign discountedPrice = variant.price | times: 0.4 %}
             <p>Discounted Price: {{ discountedPrice | money }}</p>
         {% else %}
