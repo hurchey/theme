@@ -4,8 +4,8 @@
 
         {% for collection in collections %}
             <div>
-                <a href ="{{collection.url}}">
-                    <h2>{{collection.title}}</h2>
+                <a href ="{{ collection.url }}">
+                    <h2>{{ collection.title }}</h2>
                     <p>Products: {{ collection.all_products_count }}</p>
                 </a>
             </div>
