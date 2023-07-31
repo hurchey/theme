@@ -17,13 +17,13 @@
     </select>
 
     {% for variant in product.variants %}
-  {% if variant.title == 'Small' %}
-    {% assign discountedPrice = variant.price | times: 0.4 %}
-    <p>Discounted Price: ${{ discountedPrice | money }}</p>
-  {% else %}
-    <p>Price: ${{ variant.price | money }}</p>
-  {% endif %}
-{% endfor %}
+        {% if variant.title == 'Small' %}
+            {% assign discountedPrice = variant.price | times: 0.4 %}
+            <p>Discounted Price: {{ discountedPrice | money }}</p>
+        {% else %}
+            <p>Price: {{ variant.price | money }}</p>
+        {% endif %}
+    {% endfor %}
 
 
     <button type = "submit"> Add to cart </button>
