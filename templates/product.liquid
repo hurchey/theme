@@ -23,7 +23,7 @@
         {% assign discount = (compareAtPrice - variant.price) / compareAtPrice %}
 
     {% if variant.title == 'Small' or variant.title == 'Large' %}
-        {% assign discountedPrice = variant.price %}
+        {% assign discountedPrice = variant.price | times: discount %}
         {% assign showFinalSale = true %}
         {% assign hasDiscount = true %}
     {% elsif variant.title == 'Medium' or variant.title == 'XLarge' or variant.title == 'XSmall' %}
