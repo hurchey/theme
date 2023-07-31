@@ -26,7 +26,7 @@
         {% assign discountedPrice = variant.price %}
         {% assign showFinalSale = true %}
         {% assign hasDiscount = true %}
-    {% else %}
+    {% elsif variant.title == 'Medium' or variant.title == 'XLarge' or variant.title == 'XSmall' %}
         {% assign discountedPrice = variant.price | times: (1 - coefficient) %}
         {% assign showFinalSale = discount >= coefficient %}
     {% endif %}
