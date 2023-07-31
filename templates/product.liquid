@@ -31,9 +31,9 @@
         {% assign showFinalSale = discount >= coefficient %}
     {% endif %}
 
-    {% if hasDiscount = true %}
+    {% if hasDiscount == true %}
         <p>Price: {{ discountedPrice | money }}</p>
-    {% elsif hasDiscount = falsee %}
+    {% elsif hasDiscount == falsee %}
         <p>Price: {{ variant.price | money }}</p>
     {% endif %}
 
