@@ -20,10 +20,10 @@
         {% if variant.title == 'Small' %}
             {% assign discountedPrice = variant.price | times: 0.4 %}
             <p>Discounted Price: {{ discountedPrice | money }}</p>
-        {% elseif variant.title == 'Medium' %}
+        {% elsif variant.title == 'Medium' %}
             {% assign discountedPrice = variant.price | times: 0.4 %}
             <p>Discounted Price: {{ discountedPrice | money }}</p>
-        {% elseif variant.title == 'Large' %}
+        {% elsif variant.title == 'Large' %}
             {% assign discountedPrice = variant.price | times: 0.4 %}
             <p>Discounted Price: {{ discountedPrice | money }}</p>
         {% else %}
