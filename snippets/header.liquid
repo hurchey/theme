@@ -7,16 +7,10 @@
         {%- endfor %}
     </ul>
 
-    {% if settings.show_search %}
+    {% if section.settings.show_search %}
         <form action="/search">
             <input type="search" name="q"/>
             <button type="submit">Search</button>
         </form>
     {% endif %}
 </header>
-
-<style>
-    .header{
-        background: {{ section.settings.bg }};
-    }
-</style>
