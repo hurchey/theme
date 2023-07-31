@@ -4,7 +4,7 @@
 {% if product.compare_at_price %}
     <p>Regular Price: {{ product.compare_at_price | money }}</p>
     <p>Discounted Price: {{ product.price | money }}</p>
-    <p>Discount: {{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | money }} ({{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | times: -1 }}%)</p>
+    <p>Discount: {{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round: 2 }}% off</p>
 {% else %}
     <p>Price: {{ product.price | money }}</p>
 {% endif %}
@@ -19,7 +19,9 @@
             <option value = {{variant.id}}>
                 {{variant.title}}
                 {% if variant.compare_at_price %}
-                    - {{ variant.compare_at_price | money }} ({{ variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | times: -1 }}% off)
+                    - Regular Price: {{ variant.compare_at_price | money }}
+                    - Discounted Price: {{ variant.price | money }}
+                    - Discount: {{ variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round: 2 }}% off
                 {% endif %}
             </option>
         {% endfor %}
