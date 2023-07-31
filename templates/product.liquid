@@ -25,11 +25,11 @@
         {% if discountPercentage >= 0.4 %}
             <p>Final Sale</p>
         {% else %}
-            {% if variant.title == 'Your Variant Title' %}
+            {% if variant.title == 'Small' %}
                 {% assign discountedPrice = currentPrice | times: 0.9 %}
-                <p>Discounted Price: ${{ discountedPrice | money }}</p>
+                <p>Discounted Price: {{ discountedPrice | money }}</p>
             {% else %}
-                <p>Price: ${{ currentPrice | money }}</p>
+                <p>Price: {{ currentPrice | money }}</p>
             {% endif %}
         {% endif %}
     {% endfor %}
