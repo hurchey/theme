@@ -1,13 +1,6 @@
 <h1>{{ product.title }}</h1>
 <p>{{ product.price | money}}</p>
 
-{% if product.compare_at_price %}
-    <p>Regular Price: {{ product.compare_at_price | money }}</p>
-    <p>Discounted Price: {{ product.price | money }}</p>
-    <p>Discount: {{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round: 2 }}% off</p>
-{% else %}
-    <p>Price: {{ product.price | money }}</p>
-{% endif %}
 
 <div>
     {{product.description }}
@@ -18,14 +11,30 @@
         {% for variant in product.variants %}
             <option value = {{variant.id}}>
                 {{variant.title}}
-                {% if variant.compare_at_price %}
-                    - Regular Price: {{ variant.compare_at_price | money }}
-                    - Discounted Price: {{ variant.price | money }}
-                    - Discount: {{ variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round: 2 }}% off
-                {% endif %}
+               
             </option>
         {% endfor %}
     </select>
+
+    {%- assign coefficient = 0.4 -%}
+    {%- if schema.coefficient != blank -%}
+        {%- assign coefficient = schema.coefficient -%}
+    {%- endif -%}
+
+    {%- for variation in product.variants -%}
+        {%- assign compareAtPrice = variation.compare_at_price | plus: 0 -%}
+        {%- assign price = variation.price | plus: 0 -%}
+        {%- assign discountPercentage = compareAtPrice != 0 ? ((compareAtPrice - price) / compareAtPrice) : 0 -%}
+
+        <div>
+        <p>Price: ${{ variation.price }}</p>
+        {%- if discountPercentage >= coefficient -%}
+            <p>Final Sale</p>
+        {%- endif -%}
+        <input type="hidden" name="coefficient" value="{{ coefficient }}">
+        </div>
+    {%- endfor -%}
+
 
     <button type = "submit"> Add to cart </button>
 {% endform %}
