@@ -32,7 +32,7 @@
 
     <p>Price: {{ discountedPrice | money }}</p>
 
-    {% if !showFinalSale %}
+    {% if showFinalSale == true %}
         <p>Final Sale</p>
     {% endif %}
 
