@@ -16,23 +16,27 @@
         {% endfor %}
     </select>
 
+    {% assign coefficient = settings.coefficient | default: 0.4 %}
+
     {% for variant in product.variants %}
+        {% assign compareAtPrice = variant.compare_at_price | default: variant.price %}
+        {% assign discount = (compareAtPrice - variant.price) / compareAtPrice %}
 
-        {% assign compareAtPrice = variant.compare_at_price %}
-        {% assign currentPrice = variant.price %}
-        {% assign discountPercentage = 1 - (currentPrice / compareAtPrice) %}
+    {% if variant.title == 'Small' or variant.title == 'Large' %}
+        {% assign discountedPrice = variant.price %}
+    {% else %}
+        {% assign discountedPrice = variant.price | times: (1 - coefficient) %}
+    {% endif %}
 
-        {% if discountPercentage >= 0.4 %}
-            <p>Final Sale</p>
-        {% else %}
-            {% if variant.title == 'Small' %}
-                {% assign discountedPrice = currentPrice | times: discountPercentage %}
-                <p>Discounted Price: {{ discountedPrice | money }}</p>
-            {% else %}
-                <p>Price: {{ currentPrice | money }}</p>
-            {% endif %}
-        {% endif %}
-    {% endfor %}
+    <p>Price: ${{ variant.price | money }}</p>
+
+    {% if discount >= coefficient %}
+        <p>Final Sale</p>
+    {% endif %}
+
+  <input type="hidden" name="discount_coefficient" value="{{ coefficient }}">
+{% endfor %}
+
 
 
         {% comment %} {% elsif variant.title == 'Small' %}

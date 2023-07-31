@@ -20,5 +20,17 @@
         "default": true
       }
     ]
+  },
+  {
+    "name": "Coefficient",
+    "settings": [
+      {
+        "type": "number",
+        "label": "Coefficient Value",
+        "id": "coefficient",
+        "default": 0.4
+      }
+    ]
   }
+  
 ]
