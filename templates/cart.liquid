@@ -12,10 +12,10 @@
 
             <div>
                 <img src = "{{ item.image | image_url: width: 150}}" />
-                <h2>{{item.title}}</h2>
-                <p>{{item.final_line_price | money}}</p>
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.final_line_price | money }}</p>
 
-                {% assign sale_percent = (compare_at_price - item.variant.price) / compare_at_price %}
+                {% assign sale_percent = (compare_at_price | minus: item.variant.price) | divided_by: compare_at_price %}
                 {% if sale_percent >= discount_coefficient %}
                     <p>Final Sale</p>
                 {% endif %}
