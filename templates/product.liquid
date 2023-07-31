@@ -27,7 +27,7 @@
         {%- assign discountPercentage = compareAtPrice != 0 ? ((compareAtPrice - price) / compareAtPrice) : 0 -%}
 
         <div>
-        <p>Price: ${{ variation.price }}</p>
+        <p>Price: ${{ variation.price | money }}</p>
         {%- if discountPercentage >= coefficient -%}
             <p>Final Sale</p>
         {%- endif -%}
