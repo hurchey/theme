@@ -17,7 +17,25 @@
     </select>
 
     {% for variant in product.variants %}
-        {% if variant.title == 'Small' %}
+
+        {% assign compareAtPrice = variant.compare_at_price %}
+        {% assign currentPrice = variant.price %}
+        {% assign discountPercentage = 1 - (currentPrice / compareAtPrice) %}
+
+        {% if discountPercentage >= 0.4 %}
+            <p>Final Sale</p>
+        {% else %}
+            {% if variant.title == 'Your Variant Title' %}
+                {% assign discountedPrice = currentPrice | times: 0.9 %}
+                <p>Discounted Price: ${{ discountedPrice | money }}</p>
+            {% else %}
+                <p>Price: ${{ currentPrice | money }}</p>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+
+        {% comment %} {% elsif variant.title == 'Small' %}
             {% assign discountedPrice = variant.price | times: 0.4 %}
             <p>Discounted Price: {{ discountedPrice | money }}</p>
         {% elsif variant.title == 'Medium' %}
@@ -29,7 +47,7 @@
         {% else %}
             <p>Price: {{ variant.price | money }}</p>
         {% endif %}
-    {% endfor %}
+    {% endfor %} {% endcomment %}
 
 
     <button type = "submit"> Add to cart </button>
