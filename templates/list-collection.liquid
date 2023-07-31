@@ -6,8 +6,8 @@
             <div>
                 <a href ="{{collection.url}}">
                     <h2>{{collection.title}}</h2>
-                    <p>Products: {{collection.all_products_count}}</p>
-                <a>
+                    <p>Products: {{ collection.all_products_count }}</p>
+                </a>
             </div>
         {% endfor %}
     {{  paginate | default_pagination }}
