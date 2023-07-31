@@ -6,5 +6,5 @@
             {% render 'product-item', product: product %}
         {% endfor %}
 
-    { {paginate | default_paginate }}
+    {{ paginate | default_paginate }}
 {% endpaginate %}
