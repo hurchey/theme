@@ -30,7 +30,7 @@
         {% assign showFinalSale = discount >= coefficient %}
     {% endif %}
 
-    <p>Price: {{ variant.price | money }}</p>
+    <p>Price: {{ discountedPrice | money }}</p>
 
     {% if discount >= coefficient %}
         <p>Final Sale</p>
