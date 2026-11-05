@@ -20,15 +20,15 @@
 
     {% for variant in product.variants %}
         {% assign compareAtPrice = variant.compare_at_price | default: variant.price %}
-        {% assign discount = (compareAtPrice - variant.price) / compareAtPrice %}
+        {% assign discount = compareAtPrice %}
 
     {% if variant.title == 'Small' or variant.title == 'Large' %}
         {% assign discountedPrice = variant.price | times: discount %}
         {% assign showFinalSale = true %}
         {% assign hasDiscount = true %}
     {% elsif variant.title == 'Medium' or variant.title == 'XLarge' or variant.title == 'XSmall' %}
-        {% assign discountedPrice = variant.price | times: (1 - coefficient) %}
-        {% assign showFinalSale = discount >= coefficient %}
+        {% assign discountedPrice = variant.price | times: renamed_variable_1 %}
+        {% assign showFinalSale = discount %}
     {% endif %}
 
     {% if hasDiscount == true %}
@@ -67,3 +67,19 @@
 
 
 
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% assign discount = (compareAtPrice - variant.price) / compareAtPrice %}"
+  to: "{% assign discount = compareAtPrice %}"
+  position: 568..606
+- from: "{% assign discountedPrice = variant.price | times: (1 - coefficient) %}"
+  to: "{% assign discountedPrice = variant.price | times: renamed_variable_1 %}"
+  position: 935..1007
+- from: "{% assign showFinalSale = discount >= coefficient %}"
+  to: "{% assign showFinalSale = discount %}"
+  position: 1016..1053
+{% endcomment %}

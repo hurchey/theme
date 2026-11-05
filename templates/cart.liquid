@@ -15,7 +15,7 @@
                 <h2>{{ item.title }}</h2>
                 <p>{{ item.final_line_price | money }}</p>
 
-                {% assign sale_percent = (compare_at_price | minus: item.variant.price) | divided_by: compare_at_price %}
+                {% assign sale_percent = compare_at_price | minus: item.variant.price | divided_by: compare_at_price %}
                 {% if sale_percent >= discount_coefficient %}
                     <p>Final Sale</p>
                 {% endif %}
@@ -38,4 +38,15 @@
 
     {% endif %}
 
-{% endform %}
+{% endform %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% assign sale_percent = (compare_at_price | minus: item.variant.price) |
+    divided_by: compare_at_price %}"
+  to: "{% assign sale_percent = compare_at_price | minus: item.variant.price | divided_by:
+    compare_at_price %}"
+  position: 513..616
+{%- endcomment -%}
